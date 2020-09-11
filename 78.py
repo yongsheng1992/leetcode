@@ -1,21 +1,16 @@
 """
     78. 子集
     -------
-    简单的递归
+    可以用递归，也可以用回溯
 """
 from typing import List
 
 
 class Solution:
     def subsets(self, nums: List[int]) -> List[List[int]]:
-        res = []
+        res = [[]]
 
-        def solve(nums, temp):
-            res.append(temp)
-
-            for i, num in enumerate(nums):
-                solve(nums[i+1:], temp + [num])
-
-        solve(nums, [])
+        for num in nums:
+            res += [cur + [num] for cur in res]
 
         return res
