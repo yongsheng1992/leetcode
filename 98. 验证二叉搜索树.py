@@ -2,9 +2,6 @@
     98. 验证二叉搜索树
     -----------------
 """
-from typing import List
-
-
 # Definition for a binary tree node.
 class TreeNode:
     def __init__(self, x):
@@ -33,15 +30,3 @@ class Solution:
 
         ans = in_order(root)
         return ans
-
-
-if __name__ == '__main__':
-    root = TreeNode(10)
-    root.left = TreeNode(5)
-    root.right = TreeNode(15)
-
-    # root.right.left = TreeNode(6)
-    # root.right.right = TreeNode(20)
-
-    solution = Solution()
-    print(solution.isValidBST(root))
