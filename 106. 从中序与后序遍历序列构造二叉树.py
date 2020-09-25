@@ -1,6 +1,7 @@
 """
     106. 从中序与后序遍历序列构造二叉树
     --------------------------------
+    优化空间和时间
 """
 from typing import List
 
@@ -16,17 +17,17 @@ class TreeNode:
 class Solution:
     def buildTree(self, inorder: List[int], postorder: List[int]) -> TreeNode:
 
-        def solve(inorder: List[int], postorder: List[int]):
-            if not inorder:
+        def solve(idx1, idx2):
+            if idx1 > idx2:
                 return None
 
-            root_val = postorder[-1]
-            idx = inorder.index(root_val)
-            root = TreeNode(root_val)
+            mid = postorder.pop()
+            idx = inorder.index(mid)
+            node = TreeNode(mid)
 
-            root.left = solve(inorder[:idx], postorder[:idx])
-            root.right = solve(inorder[idx + 1:], postorder[idx:-1])
+            node.right = solve(idx + 1, idx2)
+            node.left = solve(idx1, idx-1)
 
-            return root
+            return node
 
-        return solve(inorder, postorder)
+        return solve(0, len(inorder)-1)
